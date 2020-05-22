@@ -26,6 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = UIColor.whiteColor;
     [self handHUDAndToast];
 }
 
@@ -43,8 +44,9 @@
         }
     }];
     //弹toast
-    [RACSafeObserve(self.model, toast) subscribeNext:^(id x) {
+    [RACSafeObserve(self.model, toast) subscribeNext:^(NSString *x) {
         @strongify(self)
+        if (x.length == 0) return;
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.removeFromSuperViewOnHide = YES;
         hud.mode = MBProgressHUDModeText;
